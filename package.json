@@ -4,6 +4,7 @@
   "description": "Basic React coding challenge",
   "main": "index.js",
   "dependencies": {
+    "faker": "^3.1.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },

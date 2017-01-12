@@ -1,13 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import faker from 'faker';
 
-class Button extends Component {
-  render() {
-    return (
-      <button>
-        This is a button
-      </button>
-    );
-  }
-}
+const Button = ({ handleOnClick, value }) => (
+  <button
+    type="button"
+    onClick={() => handleOnClick(value, faker.internet.color())}
+    value={value}
+  >
+    {value}
+  </button>
+);
+
+Button.propTypes = {
+  handleOnClick: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default Button;
