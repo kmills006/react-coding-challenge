@@ -1,7 +1,7 @@
 {
   "name": "react-coding-challenge",
   "version": "1.0.0",
-  "description": "",
+  "description": "Basic React coding challenge",
   "main": "index.js",
   "dependencies": {
     "react": "^15.4.2",
