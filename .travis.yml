@@ -8,7 +8,7 @@ notifications:
 before_install:
   - npm i --save-dev eslint eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
 script:
-  - eslint src/ --etc .jsx
+  - eslint src/ --ext .jsx
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
