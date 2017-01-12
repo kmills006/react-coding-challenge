@@ -14,7 +14,7 @@ module.exports = {
 
   output: {
     path: PATHS.dist,
-    filename: 'app.jsx',
+    filename: 'app.js',
   },
 
   module: {
