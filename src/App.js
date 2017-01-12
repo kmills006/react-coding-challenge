@@ -1,58 +1,70 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import generateButtonIds from './utils/generate-button-ids';
+import generateContent from './utils/generate-content';
+import findWithAttr from './utils/find-with-attr';
+import ActiveContentBlock from './components/ActiveContentBlock';
 import Button from './components/Button';
-import ButtonContent from './components/ButtonContent';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      buttonIds: generateButtonIds(),
-      activeButtonId: '',
-      activeBgColor: '#FFF',
+      generatedContent: generateContent(),
+      activeContent: {},
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
-  handleButtonClick(activeButtonId, activeBgColor) {
-    this.setState({ activeButtonId, activeBgColor });
+  handleButtonClick(evt) {
+    const { generatedContent } = this.state;
+    const triggerValue = evt.target.value;
+
+    const activeContentIndex = findWithAttr(
+      generatedContent,
+      'triggerValue',
+      triggerValue,
+    );
+
+    this.setState({ activeContent: generatedContent[activeContentIndex] });
   }
 
-  renderButtonContent() {
-    const { activeButtonId } = this.state;
+  renderActiveContentBlock() {
+    const { activeContent } = this.state;
 
-    return <ButtonContent content={activeButtonId} />;
+    if (!Object.keys(activeContent).length) return null;
+
+    return <ActiveContentBlock content={activeContent.content} />;
   }
 
   renderButtons() {
-    const { buttonIds } = this.state;
+    const { generatedContent } = this.state;
 
-    return buttonIds.map((id, index) => (
+    return generatedContent.map((content, index) => (
       <Button
         handleOnClick={this.handleButtonClick}
         key={index}
-        value={id}
+        value={content.triggerValue}
       />
     ));
   }
 
   render() {
-    const { activeBgColor } = this.state;
-
-    const buttonContent = activeBgColor !== '#FFF' ? this.renderButtonContent() : null;
+    const { activeContent } = this.state;
 
     return (
-      <div className="app-wrapper" style={{ background: activeBgColor }}>
+      <div
+        className="app-wrapper"
+        style={{ background: activeContent.bgColor || '#FFF' }}
+      >
         <h1>Poetic React Coding Challenge</h1>
 
         <div className="button-group">
           {this.renderButtons()}
         </div>
 
-        {buttonContent}
+        {this.renderActiveContentBlock()}
       </div>
     );
   }

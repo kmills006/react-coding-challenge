@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
-import faker from 'faker';
 
 const Button = ({ handleOnClick, value }) => (
   <button
     type="button"
-    onClick={() => handleOnClick(value, faker.internet.color())}
+    onClick={handleOnClick}
     value={value}
   >
     {value}
